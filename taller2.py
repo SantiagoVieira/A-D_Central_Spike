@@ -1,32 +1,54 @@
-`def factorial(n):  # O(n)
-    if n == 0 or n == 1:  # O(n)
-        return 1  # O(n)
-    else:
-        return n * factorial(n-1)  # O(n)
+class CalculadoraCombinatoria:
+    def __init__(self, n, r):
+        self.n = n
+        self.r = r
 
-def permutaciones(n, r):  # O(n)
-    return factorial(n) / factorial(n-r)  # O(n)
+    def factorial(self, num):
+        if num == 0 or num == 1:
+            return 1
+        else:
+            return num * self.factorial(num-1)
 
-def combinaciones(n, r):  # O(n)
-    return factorial(n) / (factorial(r) * factorial(n-r))  # O(n)
+    def permutaciones(self):
+        return self.factorial(self.n) / self.factorial(self.n-self.r)
 
-def main():  # O(n)
-    print("1. Permutaciones")  # O(n)
-    print("2. Combinaciones")  # O(n)
-    opcion = int(input("Elige una opción: "))  # O(1)
+    def combinaciones(self):
+        return self.factorial(self.n) / (self.factorial(self.r) * self.factorial(self.n-self.r))
+
+    def variaciones(self):
+        return self.factorial(self.n) / self.factorial(self.n-self.r)
+
+class InterfazUsuario:
+    def __init__(self):
+        self.calculadora = None
+
+    def solicitar_datos(self):
+        print("1. Permutaciones")
+        print("2. Combinaciones")
+        print("3. Variaciones")
+        opcion = int(input("Elige una opción: "))
     
-    if opcion == 1 or opcion == 2:  # O(n)
-        n = int(input("Ingresa el valor de n: "))  # O(1)
-        r = int(input("Ingresa el valor de r: "))  # O(1)
-    
-    if opcion == 1:  # O(n)
-        print("Permutaciones: ", permutaciones(n, r))  # O(n)
-    elif opcion == 2:  # O(n)
-        print("Combinaciones: ", combinaciones(n, r))  # O(n)
-    else:
-        print("Opción no válida")  # O(n)
+        if opcion in [1, 2, 3]:
+            n = int(input("Ingresa el valor de n: "))
+            r = int(input("Ingresa el valor de r: "))
+            self.calculadora = CalculadoraCombinatoria(n, r)
+        
+        return opcion
+
+    def mostrar_resultado(self, opcion):
+        if opcion == 1:
+            print("Permutaciones: ", self.calculadora.permutaciones())
+        elif opcion == 2:
+            print("Combinaciones: ", self.calculadora.combinaciones())
+        elif opcion == 3:
+            print("Variaciones: ", self.calculadora.variaciones())
+        else:
+            print("Opción no válida")
+
+def main():
+    interfaz = InterfazUsuario()
+    opcion = interfaz.solicitar_datos()
+    interfaz.mostrar_resultado(opcion)
 
 if __name__ == "__main__":
-    main()  # O(n)
-
-`
+    main()
