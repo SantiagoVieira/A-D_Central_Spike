@@ -29,3 +29,4 @@ def main():
 if __name__ == "__main__":
     main()
 
+# la permutacion se realiza con n = 7 
